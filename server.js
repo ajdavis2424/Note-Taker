@@ -8,8 +8,12 @@
 // Declare installed frameworks
 const express = require('express');
 const bodyParser = require('body-parser');
-const api = require('./route/index.js');
+const api = require('./routes/index');
+
+// Initialize express w/const app = express();
 const app = express();
+
+// Created PORT variable for server to listen on (localhost:5000)
 const PORT = process.env.PORT || 5000;
 
 // NO LONGER NEED  Call the express and body parser
@@ -36,10 +40,9 @@ app.get('/', (req, res) =>
 app.get('/notes', (req, res) => 
     res.sendFile(path.join(__dirname, '/public/notes.html')));
 
-app.listen(PORT,() => 
+// line 17 POST var was created
+    app.listen(PORT,() => 
     console.log(`NoteTaker App server is running at localhost:${PORT}`));
-
-
 
 //     //then, we use app.post option.
 // app.post("/addNotes", function (req, res) {

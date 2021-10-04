@@ -33,14 +33,14 @@ app.use(express.static('public'))
 
 //HERE WE SET UP ROUTE FOR THE APP VIA APP.GET OPTION ----INDEX
 app.get('/', (req, res) => 
-    res.sendFile(path.join(__dirname, '/public/index.html')));
+    res.sendFile(path.join(__dirname, '/public/assets/index.html')));
   
 
 //HERE WE SET UP ROUTE FOR THE APP VIA APP.GET OPTION ----NOTES
 app.get('/notes', (req, res) => 
-    res.sendFile(path.join(__dirname, '/public/notes.html')));
+    res.sendFile(path.join(__dirname, '/public/assets/index.html')));
 
-// line 17 POST var was created
+// line 17 POST variable was created
     app.listen(PORT,() => 
     console.log(`NoteTaker App server is running at localhost:${PORT}`));
 

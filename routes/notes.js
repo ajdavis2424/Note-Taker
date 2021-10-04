@@ -38,10 +38,11 @@ notes.delete('/:id', async (req, res) => {
     const updatedNotes = currentNotes.filter(note => note.id !== id);
 
     writeToFile('./db/db.json', updatedNotes);
-    res.json('Note successfuly deleted 🚀');
+    res.json('THIS NOTE HAS BEEN DELETED');
   } else {
-    res.error('Error in deleting note');
+    res.error('ERROR DELETING THIS NOTE');
   }
 });
 
+// module.exports allow us to use this file elseswhere 
 module.exports = notes;

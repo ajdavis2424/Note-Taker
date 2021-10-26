@@ -29,7 +29,7 @@ app.use(express.urlencoded({extended: true }));
 app.use(express.static('public'))
 
 // This should connect my server.js file to the routes created
-app.use(express.static('/api/notes', notes))
+app.use(express.static('/api/notes', notes.js))
 app.use(express.static('/',routesHtml))
 
 

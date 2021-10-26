@@ -5,12 +5,13 @@
 
 // Require installed modules 
 
-// Declare installed frameworks
+// Declare installed frameworks to build server
 const express = require('express');
 const bodyParser = require('body-parser');
-const api = require('./routes/index');
+const api = require('./routes/notes.js');
+const htmlRoutes = ('./routes/routesHtml.js');
 
-// Initialize express w/const app = express();
+// Initialize express w/const app = express();--- creates port!
 const app = express();
 
 // Created PORT variable for server to listen on (localhost:5000)
@@ -25,20 +26,24 @@ const PORT = process.env.PORT || 5000;
 // SERVING STATIC FILES w/MIDDLEWARE
 app.use(express.json());
 app.use(express.urlencoded({extended: true }));
-app.use('/api', api);
 app.use(express.static('public'))
+
+// This should connect my server.js file to the routes created
+app.use(express.static('/api/notes', notes))
+app.use(express.static('/',routesHtml))
+
 
 // NO LONGER NEEDED---installed ejs & created file inside js folder
 // app.set('view engine', 'ejs')
 
 //HERE WE SET UP ROUTE FOR THE APP VIA APP.GET OPTION ----INDEX
-app.get('/', (req, res) => 
-    res.sendFile(path.join(__dirname, '/public/assets/index.html')));
+// app.get('/', (req, res) => 
+//     res.sendFile(path.join(__dirname, '/public/assets/index.html')));
   
 
-//HERE WE SET UP ROUTE FOR THE APP VIA APP.GET OPTION ----NOTES
-app.get('/notes', (req, res) => 
-    res.sendFile(path.join(__dirname, '/public/assets/index.html')));
+// //HERE WE SET UP ROUTE FOR THE APP VIA APP.GET OPTION ----NOTES
+// app.get('/notes', (req, res) => 
+//     res.sendFile(path.join(__dirname, '/public/assets/index.html')));
 
 // line 17 POST variable was created
     app.listen(PORT,() => 

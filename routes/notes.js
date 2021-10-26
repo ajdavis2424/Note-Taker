@@ -12,41 +12,35 @@ notes.get('/', (req, res) => {
   readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
-// THIS IS THE POST ROUTE FOR SAVING NOTES
+notes.get('/:note_id', (req, res) => {
+  const noteId = req.params.note_id;
+readFromFile('./db/db.json')
+  .then((data) => JSON.parse(data))
+  .then((json) => {
+      console.log(json);
+    const result = json.filter((note) => note.note_id === noteId);
+    return result.length > 0
+      ? res.json(result)
+      : res.json('No Note with that ID');
+  });
+});
+
 notes.post('/', (req, res) => {
-    const { title, text } = req.body;
-  // new user ID created
-    const id = uuid();
-    const newNotes = {
-        title,
-        text,
-        id:
+  console.log(req.body);
+
+  const { title, text } = req.body;
+
+  if (req.body){
+      const newNote = {
+          title,
+          text,
+          note_id: uuidv4(),
       };
-    
-      readAndAppend(newNotes, './db/db.json');
-      res.send(`This note has been saved successfully!!`);
-    // } else {
-    //   res.error('THERE WAS AN ERROR SAVING THIS NOTE');
-    // }
-})
 
-// // THIS IS THE POST ROUTE FOR DELETING NOTES
-// notes.delete('/:id', async (req, res) => {
-
-//   const { id } = req.params;
-
-//   if (id) {
-    
-//     const currentNotes = await readFromFile('./db/db.json').then((data) => JSON.parse(data));    
-    
-//     const updatedNotes = currentNotes.filter(note => note.id !== id);
-
-//     writeToFile('./db/db.json', updatedNotes);
-//     res.json('THIS NOTE HAS BEEN DELETED');
-//   } else {
-//     res.error('ERROR DELETING THIS NOTE');
-//   }
-// });
-
-// module.exports allow us to use this file elseswhere 
+      readAndAppend(newNote, './db/db.json');
+      res.json(`Note added successfully 🚀`);
+  } else {
+      res.error('Error in adding Note');
+  }
+});
 module.exports = notes;

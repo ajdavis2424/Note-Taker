@@ -7,12 +7,15 @@
 
 // Declare installed frameworks to build server
 const express = require('express');
-const bodyParser = require('body-parser');
-const api = require('./routes/notes.js');
-const htmlRoutes = ('./routes/routesHtml.js');
+// const bodyParser = require('body-parser');
+const apiRoutes = require('./routes/notes.js');
+const routesHtml = ('./routes/notes.js');
+const {clog} = require('./middleware/clog')
 
 // Initialize express w/const app = express();--- creates port!
 const app = express();
+
+app.use(clog)
 
 // Created PORT variable for server to listen on (localhost:5000)
 const PORT = process.env.PORT || 5000;
@@ -29,8 +32,8 @@ app.use(express.urlencoded({extended: true }));
 app.use(express.static('public'))
 
 // This should connect my server.js file to the routes created
-app.use(express.static('/api/notes', notes.js))
-app.use(express.static('/',routesHtml))
+app.use('/api', apiRoutes)
+app.use('/',routesHtml)
 
 
 // NO LONGER NEEDED---installed ejs & created file inside js folder
@@ -47,7 +50,7 @@ app.use(express.static('/',routesHtml))
 
 // line 17 POST variable was created
     app.listen(PORT,() => 
-    console.log(`NoteTaker App server is running at localhost:${PORT}`));
+        console.log(`NoteTaker App server is running at localhost:${PORT}`));
 
 //     //then, we use app.post option.
 // app.post("/addNotes", function (req, res) {

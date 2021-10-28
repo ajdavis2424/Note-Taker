@@ -1,7 +1,7 @@
 // const express = require('express');
 const path = require('path');
+const express =require('express');
 const router = require('express').Router();
-
 // FUll SCRAP
 // '/notes/ responds with the notes.html file via bootcamp starter code
 router.get('/notes', (req, res) => {

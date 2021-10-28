@@ -7,15 +7,16 @@
 
 // Declare installed frameworks to build server
 const express = require('express');
+const router = require('./routes/notes.js');
 // const bodyParser = require('body-parser');
 const apiRoutes = require('./routes/notes.js');
 const routesHtml = ('./routes/notes.js');
-const {clog} = require('./middleware/clog')
+// const {clog} = require('./middleware/clog')
 
 // Initialize express w/const app = express();--- creates port!
 const app = express();
 
-app.use(clog)
+// app.use(clog)
 
 // Created PORT variable for server to listen on (localhost:5000)
 const PORT = process.env.PORT || 5000;
